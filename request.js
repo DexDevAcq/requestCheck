@@ -1,13 +1,17 @@
 function getPosts(amountOfPost) {
-    let xhr = new XMLHttpRequest();
+    return  new Promise((res, rej) => {
+            let xhr = new XMLHttpRequest();
 
-    xhr.open("GET", `https://jsonplaceholder.typicode.com/posts?_limit=${amountOfPost}`);
-    xhr.send();
-    xhr.onload = function() {
-        console.log(JSON.parse(xhr.response))
-    };
+            xhr.open("GET", `https://jsonplaceholder.typicode.com/posts?_limit=${amountOfPost}`);
+            xhr.send();
+            xhr.onload = function() {
+                res(JSON.parse(xhr.response))
+            };
+    })
 }
 
 
 
-getPosts(10)
+getPosts(10).then(data => {
+    console.log(data)
+})
